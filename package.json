@@ -4,7 +4,9 @@
   "description": "express-node server and mongoose database",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "start": "node index.js",
+    "lint": "eslint src/**.js",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -17,10 +19,13 @@
   },
   "homepage": "https://github.com/AnneThor/api-server#readme",
   "devDependencies": {
+    "@code-fellows/supergoose": "^1.0.11",       
+    "eslint": "^7.21.0",
     "jest": "^26.6.3"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.11.18"
   }
 }
