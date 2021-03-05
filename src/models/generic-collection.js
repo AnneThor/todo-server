@@ -50,7 +50,11 @@ class GenericCollection {
   * @param {string} - a mongoose _id string
   */
   delete(_id) {
-    return this.model.findOneAndDelete({ _id: _id });
+    return this.model.findOneAndDelete({ _id: _id })
+  }
+
+  deleteAll() {
+    return this.model.deleteMany({})
   }
 
 }

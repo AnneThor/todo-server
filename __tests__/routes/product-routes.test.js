@@ -15,8 +15,6 @@ const mockRequest = supertest(server);
 
 describe('PRODUCT ROUTES functionality', () => {
 
-  //need to prepopulate the database (db functionality tested separately)
-  //adding 5 records to it
   beforeEach(() => {
     for(let i=0; i<5; i++) {
       testDB.create({ "name": "newName"+`${i}`, "cost": i });
@@ -24,13 +22,7 @@ describe('PRODUCT ROUTES functionality', () => {
   });
 
   afterEach(() => {
-    //should delete all entries
-    return testDB.get()
-      .then(results => {
-        results.forEach(product => {
-          testDB.delete(product._id);
-        })
-      })
+    return testDB.deleteAll();
   });
 
   it('should return a 404 on a bad method', async () => {
@@ -51,8 +43,7 @@ describe('PRODUCT ROUTES functionality', () => {
     await mockRequest.get('/product')
       .then(reply => {
         expect(reply.status).toBe(200);
-        // this test is failing because I cannot get my "afterEach" function to properly operate
-        // expect(reply.body.length).toBe(5);
+        expect(reply.body.length).toBe(5);
       });
   });
 
@@ -97,6 +88,12 @@ describe('PRODUCT ROUTES functionality', () => {
           .then(reply => {
             expect(reply.status).toBe(200);
             expect(reply.body.name).toEqual("deleteName")
+          })
+      })
+      .then(async() => {
+        await mockRequest.get('/product')
+          .then(reply => {
+            expect(reply.body.length).toEqual(5);
           })
       })
   })

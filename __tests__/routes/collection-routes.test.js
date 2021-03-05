@@ -15,8 +15,7 @@ const mockRequest = supertest(server);
 
 describe('CATEGORY ROUTES functionality', () => {
 
-  //need to prepopulate the database (db functionality tested separately)
-  //adding 5 records to it
+  //pre populate database, it should create 5 records before each test
   beforeEach(() => {
     for(let i=0; i<5; i++) {
       testDB.create({ "name": "newName"+`${i}` });
@@ -24,13 +23,7 @@ describe('CATEGORY ROUTES functionality', () => {
   });
 
   afterEach(() => {
-    //should delete all entries
-    return testDB.get()
-      .then(results => {
-        results.forEach(category => {
-          testDB.delete(category._id);
-        })
-      })
+    return testDB.deleteAll();
   });
 
   it('should return a 404 on a bad method', async () => {
@@ -51,8 +44,7 @@ describe('CATEGORY ROUTES functionality', () => {
     await mockRequest.get('/category')
       .then(reply => {
         expect(reply.status).toBe(200);
-        // this test is failing because I cannot get my "afterEach" function to properly operate
-        // expect(reply.body.length).toBe(5);
+        expect(reply.body.length).toBe(5);
       });
   });
 
@@ -62,6 +54,7 @@ describe('CATEGORY ROUTES functionality', () => {
         await mockRequest.get(`/category/${newCategory._id}`)
           .then(reply => {
             expect(reply.status).toBe(200);
+            expect(reply.body._id).toBeTruthy();
             expect(reply.body.name).toEqual("idName");
           });
       });
@@ -92,7 +85,12 @@ describe('CATEGORY ROUTES functionality', () => {
         await mockRequest.delete(`/category/${foundCategory._id}`)
           .then(reply => {
             expect(reply.status).toBe(200);
-            expect(reply.body.name).toEqual("deleteName")
+            expect(reply.body.name).toEqual("deleteName");
+          })
+        await mockRequest.get('/category')
+          .then(reply => {
+            console.log(`REPLY BODY`, reply.body)
+            expect(reply.body.length).toEqual(5);
           })
       })
   })
