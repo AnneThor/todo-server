@@ -12,6 +12,7 @@ Basic Express/Node Server using Mongoose to preform CRUD actions
 ```.env``` requirements:
 
 - ```PORT``` - port number
+- `MONGO_URI` - mongo db connection
 
 ## Running the App
 
