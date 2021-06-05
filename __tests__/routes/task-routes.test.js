@@ -3,7 +3,7 @@
 require('@code-fellows/supergoose');
 
 const supertest = require('supertest');
-const { tasks } = require('../../src/routes/tasks.js'); //categoryRouter
+const { tasks } = require('../../src/routes/tasks.js');
 
 const mongoose = require('mongoose');
 const taskModel = require('../../src/models/tasks.js');
