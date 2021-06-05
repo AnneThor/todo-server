@@ -2,15 +2,14 @@
 
 const mongoose = require('mongoose');
 
-const categorySchema = mongoose.Schema({
-  name: { type: String, required: true },
-  keywords: {
-    type: [String],
-    default: [],
-  },
+const taskSchema = mongoose.Schema({
+  task: { type: String, required: true },
+  person: { type: String, required: true },
+  difficulty: { type: Number, required: true },
+  completed: { type: Boolean, default: false }
 });
 
 //create the model
-const categoryModel = mongoose.model('category', categorySchema);
+const taskModel = mongoose.model('task', taskSchema);
 
-module.exports = categoryModel;
+module.exports = taskModel;
