@@ -1,5 +1,9 @@
-# api-server
+# Todo- list server
 Basic Express/Node Server using Mongoose to preform CRUD actions
+
+Added users model, basic and bearer auth functionality to restrict access to the database.
+
+ACL implemented to allow basic access (read) to all users with a jwt; create/update/delete functions are restricted to editor and admin levels of access.
 
 ## Author: Anne Thorsteinson
 
@@ -32,4 +36,3 @@ Basic Express/Node Server using Mongoose to preform CRUD actions
 
 ## UML Diagram
 
-![UML diagram of basic express server project](./Lab04.png)
