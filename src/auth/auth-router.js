@@ -16,6 +16,8 @@ authRouter.post('/signup', async (req, res) => {
       user: userRecord,
       token: userRecord.token
     };
+    res.cookie("auth", userRecord.token);
+    res.set("auth", userRecord.token);
     res.status(201).json(output);
   } catch (e) {
     res.status(500).send(e.message);
@@ -27,6 +29,8 @@ authRouter.post('/signin', basicAuth, (req, res) => {
     user: req.user,
     token: req.user.token
   };
+  res.cookie("auth", req.user.token);
+  res.set("auth", req.user.token);
   res.status(200).json(user);
 });
 

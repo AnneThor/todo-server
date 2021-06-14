@@ -26,7 +26,6 @@ describe("AUTH ROUTER FUNCTIONALITY", () => {
         expect(reply.status).toBe(201);
         expect(reply.body.user.username).toEqual('admin');
         expect(reply.body.user.token).toBeTruthy();
-        console.log("TOKEN", reply.body.user.token)
       })
   });
 

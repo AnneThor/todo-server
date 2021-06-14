@@ -10,12 +10,11 @@ const taskRouter = new express.Router();
 
 // all routes are restricted to bearer auth
 // meaning those with jwt only
-taskRouter.use(bearerAuth);
+// taskRouter.use(bearerAuth);
 
 // anyone with valid jwt can use get methods
 taskRouter.get('/task', async (req,res) => {
   const tasks = await taskCollection.get();
-  console.log("TASKS", tasks);
   res.status(200).send(tasks);
 });
 taskRouter.get('/task/:id', async (req, res) => {
@@ -24,19 +23,19 @@ taskRouter.get('/task/:id', async (req, res) => {
 });
 
 // restricted to users with CREATE capability
-taskRouter.post('/task', restrict('create'), async (req, res) => {
+taskRouter.post('/task', async (req, res) => {
   const newtask = await taskCollection.create(req.body);
   res.status(201).send(newtask);
 });
 
 // restricted to users with UPDATE capability
-taskRouter.put('/task/:id', restrict('update'), async (req, res) => {
+taskRouter.put('/task/:id', async (req, res) => {
   const updtask = await taskCollection.update(req.params.id, req.body);
   res.status(200).send(updtask);
 });
 
 // restrict to users with DELETE capability
-taskRouter.delete('/task/:id', restrict('delete'), async (req, res) => {
+taskRouter.delete('/task/:id', async (req, res) => {
   const deletedtask = await taskCollection.delete(req.params.id);
   res.status(200).send(deletedtask);
 });
