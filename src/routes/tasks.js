@@ -4,7 +4,7 @@ const express = require('express');
 const taskModel = require('../models/tasks.js');
 const genericCollection = require('../models/generic-collection.js');
 const taskCollection = new genericCollection(taskModel);
-const bearerAuth = require('../auth/middelware/bearer.js');
+const bearerAuth = require('../auth/middleware/bearer.js');
 const restrict = require('../auth/middleware/acl.js');
 const taskRouter = new express.Router();
 
@@ -15,6 +15,7 @@ taskRouter.use(bearerAuth);
 // anyone with valid jwt can use get methods
 taskRouter.get('/task', async (req,res) => {
   const tasks = await taskCollection.get();
+  console.log("TASKS", tasks);
   res.status(200).send(tasks);
 });
 taskRouter.get('/task/:id', async (req, res) => {
