@@ -9,7 +9,7 @@ ACL implemented to allow basic access (read) to all users with a jwt; create/upd
 
 **[Tests](https://github.com/AnneThor/api-server/actions)**
 
-**[Front End](https://api-server-mongoose.herokuapp.com/)**
+**[Front End](https://at-taskmanager.herokuapp.com/)**
 
 ## Setup
 
